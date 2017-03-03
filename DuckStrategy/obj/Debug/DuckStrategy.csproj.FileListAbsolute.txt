@@ -1,0 +1,6 @@
+c:\users\pjs\documents\visual studio 2013\Projects\DesignPatterns\DuckStrategy\bin\Debug\DuckStrategy.exe.config
+c:\users\pjs\documents\visual studio 2013\Projects\DesignPatterns\DuckStrategy\obj\Debug\DuckStrategy.csprojResolveAssemblyReference.cache
+c:\users\pjs\documents\visual studio 2013\Projects\DesignPatterns\DuckStrategy\bin\Debug\DuckStrategy.exe
+c:\users\pjs\documents\visual studio 2013\Projects\DesignPatterns\DuckStrategy\bin\Debug\DuckStrategy.pdb
+c:\users\pjs\documents\visual studio 2013\Projects\DesignPatterns\DuckStrategy\obj\Debug\DuckStrategy.exe
+c:\users\pjs\documents\visual studio 2013\Projects\DesignPatterns\DuckStrategy\obj\Debug\DuckStrategy.pdb

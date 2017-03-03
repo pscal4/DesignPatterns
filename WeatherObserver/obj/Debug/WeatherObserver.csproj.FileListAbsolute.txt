@@ -1,0 +1,6 @@
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\WeatherObserver\bin\Debug\WeatherObserver.exe.config
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\WeatherObserver\obj\Debug\WeatherObserver.csprojResolveAssemblyReference.cache
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\WeatherObserver\bin\Debug\WeatherObserver.exe
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\WeatherObserver\bin\Debug\WeatherObserver.pdb
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\WeatherObserver\obj\Debug\WeatherObserver.exe
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\WeatherObserver\obj\Debug\WeatherObserver.pdb
