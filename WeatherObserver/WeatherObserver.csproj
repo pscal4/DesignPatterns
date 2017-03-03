@@ -43,11 +43,11 @@
   <ItemGroup>
     <Compile Include="IDisplayElement.cs" />
     <Compile Include="IWeatherObserver.cs" />
-    <Compile Include="ISubject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WeatherData.cs" />
-    <Compile Include="WeatherDisplay.cs" />
+    <Compile Include="WeatherDisplays.cs" />
+    <Compile Include="WeatherProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
