@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,9 +27,13 @@ namespace WeatherObserver
             unsubscriber.Dispose();
         }
 
-        public abstract void OnCompleted();
-        public abstract void OnNext(WeatherData value);
+        public abstract void OnNext(WeatherData voWeatherData);
 
+        // Default implementations for IObserver<WeatherData>
+        public virtual void OnCompleted()
+        {
+            // Do Nothing
+        }
         public virtual void OnError(Exception error)
         {
             // Do Nothing
@@ -38,10 +42,12 @@ namespace WeatherObserver
     }
     public class CurrentConditionsDisplay : WeatherDisplay, IDisplayElement
     {
-
         private float mnTemperature;
         private float mnHumidity;
-        public CurrentConditionsDisplay(IObservable<WeatherData> voWeatherProvider)  : base(voWeatherProvider) {
+
+        public CurrentConditionsDisplay(IObservable<WeatherData> voWeatherProvider)
+            : base(voWeatherProvider)
+        {
 
         }
 
@@ -50,11 +56,11 @@ namespace WeatherObserver
             Console.WriteLine(String.Format("Current conditions: {0}F degreees and {1}% humidity", mnTemperature, mnHumidity));
         }
 
-
-        public override void OnCompleted()
-        {
-            Console.WriteLine("Additional weather data will not be transmitted to the Current Conditions display.");
-        }
+        // This will take the default implementation (do nothing)
+        //public override void OnCompleted()
+        //{
+        //    Console.WriteLine("Additional weather data will not be transmitted to the Current Conditions display.");
+        //}
 
 
         public override void OnNext(WeatherData oWeatherData)
@@ -64,30 +70,17 @@ namespace WeatherObserver
             Display();
         }
     }
-    public class StatisticsDisplay : IDisplayElement, IObserver<WeatherData>
+    public class StatisticsDisplay : WeatherDisplay, IDisplayElement
     {
-        // From the MSDN Observer pattern doc
-        private IDisposable unsubscriber;
-        private IObservable<WeatherData> moWeatherDataProvider;
 
         private float maxTemp = 0.0f;
         private float minTemp = 200;
         private float tempSum = 0.0f;
         private int numReadings;
         public StatisticsDisplay(IObservable<WeatherData> voWeatherProvider)
+            : base(voWeatherProvider)
         {
-            moWeatherDataProvider = voWeatherProvider;
-            Subscribe(moWeatherDataProvider);
-        }
 
-        public virtual void Subscribe(IObservable<WeatherData> provider)
-        {
-            unsubscriber = provider.Subscribe(this);
-        }
-        public virtual void Unsubscribe()
-        {
-            unsubscriber.Dispose();
-            Console.WriteLine("Statistics display is shutting down.");
         }
 
 
@@ -97,17 +90,12 @@ namespace WeatherObserver
             + "/" + maxTemp + "/" + minTemp);
         }
 
-        public void OnCompleted()
+        public override void OnCompleted()
         {
             Console.WriteLine("Additional weather data will not be transmitted to the Statistics Display.");
         }
 
-        public void OnError(Exception error)
-        {
-            // Do nothing 
-        }
-
-        public void OnNext(WeatherData voWeatherData)
+        public override void OnNext(WeatherData voWeatherData)
         {
             tempSum += voWeatherData.Temperature;
             numReadings++;
@@ -125,27 +113,15 @@ namespace WeatherObserver
             Display();
         }
     }
-    public class ForecastDisplay : IDisplayElement, IObserver<WeatherData>
+    public class ForecastDisplay : WeatherDisplay, IDisplayElement
     {
         private float currentPressure = 29.92f;
         private float lastPressure;
-        private IDisposable unsubscriber;
-        private WeatherProvider moWeatherProvider;
 
-        public ForecastDisplay(WeatherProvider voWeatherProvider)
+        public ForecastDisplay(IObservable<WeatherData> voWeatherProvider)
+            : base(voWeatherProvider)
         {
-            moWeatherProvider = voWeatherProvider;
-            Subscribe(moWeatherProvider);
         }
-        public virtual void Subscribe(WeatherProvider provider)
-        {
-            unsubscriber = provider.Subscribe(this);
-        }
-        public virtual void Unsubscribe()
-        {
-            unsubscriber.Dispose();
-        }
-
 
         public void Display()
         {
@@ -164,17 +140,13 @@ namespace WeatherObserver
             }
         }
 
-        public void OnCompleted()
+        public override void OnCompleted()
         {
             Console.WriteLine("Additional weather data will not be transmitted to the Forecast Display.");
         }
 
-        public void OnError(Exception error)
-        {
-            // Do Nothing
-        }
 
-        public void OnNext(WeatherData voWeatherData)
+        public override void OnNext(WeatherData voWeatherData)
         {
             lastPressure = currentPressure;
             currentPressure = voWeatherData.Pressure;
@@ -182,29 +154,29 @@ namespace WeatherObserver
             Display();
         }
     }
-    public class HeatIndexDisplay : IDisplayElement, IObserver<WeatherData>
-        {
-            private IDisposable unsubscriber;
-            private WeatherProvider moWeatherProvider;
+    public class HeatIndexDisplay : WeatherDisplay, IDisplayElement
+    {
+        private float heatIndex = 0.0f;
+        public HeatIndexDisplay(IObservable<WeatherData> voWeatherProvider)
+            : base(voWeatherProvider) {}
 
-            private float heatIndex = 0.0f;
-            private WeatherData weatherData;
+        public void Display()
+        {
+            Console.WriteLine(String.Format("Heat index is {0}", heatIndex));
 
-        public HeatIndexDisplay(WeatherProvider voWeatherProvider)
-        {
-            moWeatherProvider = voWeatherProvider;
-            Subscribe(moWeatherProvider);
-        }
-        public virtual void Subscribe(WeatherProvider provider)
-        {
-            unsubscriber = provider.Subscribe(this);
-        }
-        public virtual void Unsubscribe()
-        {
-            unsubscriber.Dispose();
-            Console.WriteLine("Statistics display is shutting down.");
         }
 
+        public override void OnCompleted()
+        {
+            Console.WriteLine("Additional weather data will not be transmitted to the Heat Index Display.");
+        }
+
+
+        public override void OnNext(WeatherData voWeatherData)
+        {
+            heatIndex = ComputeHeatIndex(voWeatherData.Temperature, voWeatherData.Humidity);
+            Display();
+        }
         private float ComputeHeatIndex(float t, float rh)
         {
             float index = (float)((16.923 + (0.185212 * t) + (5.37941 * rh) - (0.100254 * t * rh)
@@ -217,27 +189,5 @@ namespace WeatherObserver
                 (0.0000000000481975 * (t * t * t * rh * rh * rh)));
             return index;
         }
-
-        public void Display()
-        {
-            Console.WriteLine(String.Format("Heat index is {0}", heatIndex));
-
-        }
-
-        public void OnCompleted()
-        {
-            Console.WriteLine("Additional weather data will not be transmitted to the Heat Index Display.");
-        }
-
-        public void OnError(Exception error)
-        {
-            // Do Nothing
-        }
-
-        public void OnNext(WeatherData voWeatherData)
-        {
-            heatIndex = ComputeHeatIndex(voWeatherData.Temperature,voWeatherData.Humidity);
-            Display();
-        }
-        }
+    }
 }
