@@ -1,0 +1,6 @@
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\BeverageDecorator\bin\Debug\BeverageDecorator.exe.config
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\BeverageDecorator\obj\Debug\BeverageDecorator.csprojResolveAssemblyReference.cache
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\BeverageDecorator\bin\Debug\BeverageDecorator.exe
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\BeverageDecorator\bin\Debug\BeverageDecorator.pdb
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\BeverageDecorator\obj\Debug\BeverageDecorator.exe
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\BeverageDecorator\obj\Debug\BeverageDecorator.pdb
