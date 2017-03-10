@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherObserver", "WeatherO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeverageDecorator", "BeverageDecorator\BeverageDecorator.csproj", "{93E8ECB6-520F-41C5-9435-72DABAD99B5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PizzaFactory", "PizzaFactory\PizzaFactory.csproj", "{536248D1-BF54-491B-9876-F77A8B9E3110}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{93E8ECB6-520F-41C5-9435-72DABAD99B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93E8ECB6-520F-41C5-9435-72DABAD99B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93E8ECB6-520F-41C5-9435-72DABAD99B5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{536248D1-BF54-491B-9876-F77A8B9E3110}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{536248D1-BF54-491B-9876-F77A8B9E3110}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{536248D1-BF54-491B-9876-F77A8B9E3110}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{536248D1-BF54-491B-9876-F77A8B9E3110}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

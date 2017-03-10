@@ -1,0 +1,6 @@
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\PizzaFactory\bin\Debug\PizzaFactory.exe.config
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\PizzaFactory\obj\Debug\PizzaFactory.csprojResolveAssemblyReference.cache
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\PizzaFactory\bin\Debug\PizzaFactory.exe
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\PizzaFactory\bin\Debug\PizzaFactory.pdb
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\PizzaFactory\obj\Debug\PizzaFactory.exe
+C:\Users\pjs\documents\visual studio 2013\Projects\DesignPatterns\PizzaFactory\obj\Debug\PizzaFactory.pdb
