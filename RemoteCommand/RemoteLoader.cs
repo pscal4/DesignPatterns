@@ -11,14 +11,16 @@ namespace RemoteCommand
         // Appliances are created
         Light moLivingRoomLight = new Light("Living Room");
         Light moKitchenLight = new Light("Kitchen");
-        // Need Ceiling Fan?
+        CeilingFan moLivingRoomCeilingFan = new CeilingFan("Living Room");
         GarageDoor moGarageDoor = new GarageDoor();
         Stereo moLivingRoomStereo = new Stereo("Living Room");
 
         // Commands
         LightOnCommand moLivingRoomLightOn, moKitchenLightOn;
         LightOffCommand moLivingRoomLightOff, moKitchenLightOff;
-        // Need Ceiling Fam
+        CeilngFanHighCommand moCeilngFanHighCommand;
+        CeilngFanMediumCommand moCeilngFanMediumCommand;
+        CeilngFanOffCommand moCeilngFanOffCommand;
         GarageDoorOpenCommand moGarageOpen;
         GarageDoorCloseCommand moGarageClose;
         StereoOnWithCDCommand moStereoOnCD;
@@ -33,13 +35,17 @@ namespace RemoteCommand
             moKitchenLightOff = new LightOffCommand(moKitchenLight);
             moGarageOpen = new GarageDoorOpenCommand(moGarageDoor);
             moGarageClose = new GarageDoorCloseCommand(moGarageDoor);
-            // Need Ceiling Fan
             moStereoOnCD = new StereoOnWithCDCommand(moLivingRoomStereo);
             moStereoOff = new StereOffCommand(moLivingRoomStereo);
+            moCeilngFanHighCommand = new CeilngFanHighCommand(moLivingRoomCeilingFan);
+            moCeilngFanMediumCommand = new CeilngFanMediumCommand(moLivingRoomCeilingFan);
+            moCeilngFanOffCommand = new CeilngFanOffCommand(moLivingRoomCeilingFan);
 
             voRemote.SetCommand(0, moLivingRoomLightOn, moLivingRoomLightOff);
             voRemote.SetCommand(1, moKitchenLightOn, moKitchenLightOff);
             voRemote.SetCommand(2, moStereoOnCD, moStereoOff);
+            voRemote.SetCommand(3, moCeilngFanMediumCommand, moCeilngFanOffCommand);
+            voRemote.SetCommand(4, moCeilngFanHighCommand, moCeilngFanOffCommand);
 
         }
     }

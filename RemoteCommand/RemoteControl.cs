@@ -10,7 +10,9 @@ namespace RemoteCommand
     {
         List<ICommand> moOnCommands;
         List<ICommand> moOffCommands;
+        ICommand moUndoCommand;
         int miCapacity;
+
         public RemoteControl(int viCapacity)
         {
             miCapacity = viCapacity;
@@ -22,6 +24,7 @@ namespace RemoteCommand
             {
                 this.SetCommand(i, oNoCommand, oNoCommand);   
             }
+            moUndoCommand = oNoCommand;
         }
         public void SetCommand(int viSlot, ICommand voOnCommand, ICommand voOffCommand)
         {
@@ -38,10 +41,16 @@ namespace RemoteCommand
         public void OnButtonWasPressed(int viSlot)
         {
             moOnCommands[viSlot].Execute();
+            moUndoCommand = moOnCommands[viSlot];
         }
         public void OffButtonWasPressed(int viSlot)
         {
             moOffCommands[viSlot].Execute();
+            moUndoCommand = moOffCommands[viSlot];
+        }
+        public void UndoButtonWasPressed()
+        {
+            moUndoCommand.Undo();
         }
         public override string ToString()
         {
@@ -53,6 +62,8 @@ namespace RemoteCommand
                 oStringBuilder.Append(String.Format("[slot {0}] {1} {2}\n",
                      i, moOnCommands[i].ToString(), moOffCommands[i].ToString()));
             }
+            oStringBuilder.Append(String.Format("Undo {0}\n",moUndoCommand.ToString()));
+
             return oStringBuilder.ToString();
         }
     }
