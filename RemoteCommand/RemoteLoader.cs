@@ -6,47 +6,49 @@ using System.Threading.Tasks;
 
 namespace RemoteCommand
 {
-    public class RemoteLoader
+    public static class RemoteLoader
     {
-        // Appliances are created
-        Light moLivingRoomLight = new Light("Living Room");
-        Light moKitchenLight = new Light("Kitchen");
-        CeilingFan moLivingRoomCeilingFan = new CeilingFan("Living Room");
-        GarageDoor moGarageDoor = new GarageDoor();
-        Stereo moLivingRoomStereo = new Stereo("Living Room");
 
-        // Commands
-        LightOnCommand moLivingRoomLightOn, moKitchenLightOn;
-        LightOffCommand moLivingRoomLightOff, moKitchenLightOff;
-        CeilngFanHighCommand moCeilngFanHighCommand;
-        CeilngFanMediumCommand moCeilngFanMediumCommand;
-        CeilngFanOffCommand moCeilngFanOffCommand;
-        GarageDoorOpenCommand moGarageOpen;
-        GarageDoorCloseCommand moGarageClose;
-        StereoOnWithCDCommand moStereoOnCD;
-        StereOffCommand moStereoOff;
-
-        public RemoteLoader(RemoteControl voRemote)
+        public static void LoadRemote(RemoteControl voRemote)
         {
-            // Instantiate the command associating them with the appliances
-            moLivingRoomLightOn = new LightOnCommand(moLivingRoomLight);
-            moLivingRoomLightOff = new LightOffCommand(moLivingRoomLight);
-            moKitchenLightOn = new LightOnCommand(moKitchenLight);
-            moKitchenLightOff = new LightOffCommand(moKitchenLight);
-            moGarageOpen = new GarageDoorOpenCommand(moGarageDoor);
-            moGarageClose = new GarageDoorCloseCommand(moGarageDoor);
-            moStereoOnCD = new StereoOnWithCDCommand(moLivingRoomStereo);
-            moStereoOff = new StereOffCommand(moLivingRoomStereo);
-            moCeilngFanHighCommand = new CeilngFanHighCommand(moLivingRoomCeilingFan);
-            moCeilngFanMediumCommand = new CeilngFanMediumCommand(moLivingRoomCeilingFan);
-            moCeilngFanOffCommand = new CeilngFanOffCommand(moLivingRoomCeilingFan);
+            // Create appliances and their commands
+            var oLivingRoomLight = new Light("Living Room");
+            var oLivingRoomLightOn = new LightOnCommand(oLivingRoomLight);
+            var oLivingRoomLightOff = new LightOffCommand(oLivingRoomLight);
 
-            voRemote.SetCommand(0, moLivingRoomLightOn, moLivingRoomLightOff);
-            voRemote.SetCommand(1, moKitchenLightOn, moKitchenLightOff);
-            voRemote.SetCommand(2, moStereoOnCD, moStereoOff);
-            voRemote.SetCommand(3, moCeilngFanMediumCommand, moCeilngFanOffCommand);
-            voRemote.SetCommand(4, moCeilngFanHighCommand, moCeilngFanOffCommand);
+            var oKitchenLight = new Light("Kitchen");
+            var oKitchenLightOn = new LightOnCommand(oKitchenLight);
+            var oKitchenLightOff = new LightOffCommand(oKitchenLight);
 
+            var oGarageDoor = new GarageDoor();
+            var oGarageOpen = new GarageDoorOpenCommand(oGarageDoor);
+            var oGarageClose = new GarageDoorCloseCommand(oGarageDoor);
+
+            var oLivingRoomStereo = new Stereo("Living Room");
+            var oStereoOnCD = new StereoOnWithCDCommand(oLivingRoomStereo);
+            var oStereoOff = new StereOffCommand(oLivingRoomStereo);
+
+            var oLivingRoomCeilingFan = new CeilingFan("Living Room");
+            var oCeilngFanHighCommand = new CeilngFanHighCommand(oLivingRoomCeilingFan);
+            var oCeilngFanMediumCommand = new CeilngFanMediumCommand(oLivingRoomCeilingFan);
+            var oCeilngFanOffCommand = new CeilngFanOffCommand(oLivingRoomCeilingFan);
+
+            var oHotTub = new HotTub();
+            var oHotTubJetsOnCommand = new HotTubJetsOnCommand(oHotTub);
+            var oHotTubJetsOffCommand = new HotTubJetsOffCommand(oHotTub);
+
+            // Party (macro) button
+            ICommand[] oPartyOn = { oLivingRoomLightOn, oStereoOnCD, oHotTubJetsOnCommand };
+            ICommand[] oPartyOff = { oLivingRoomLightOff, oStereoOff, oHotTubJetsOffCommand };
+            var oPartyOnMacro = new MacroCommand(oPartyOn);
+            var oPartyOffMacro = new MacroCommand(oPartyOff);
+
+            voRemote.SetCommand(0, oLivingRoomLightOn, oLivingRoomLightOff);
+            voRemote.SetCommand(1, oKitchenLightOn, oKitchenLightOff);
+            voRemote.SetCommand(2, oStereoOnCD, oStereoOff);
+            voRemote.SetCommand(3, oCeilngFanMediumCommand, oCeilngFanOffCommand);
+            voRemote.SetCommand(4, oCeilngFanHighCommand, oCeilngFanOffCommand);
+            voRemote.SetCommand(5, oPartyOnMacro, oPartyOffMacro);
         }
     }
 }

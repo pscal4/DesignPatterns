@@ -6,110 +6,45 @@ using System.Threading.Tasks;
 
 namespace RemoteCommand
 {
-    public class NoCommand : ICommand
+    public class CeilingFan
     {
+        public static int HIGH = 3;
+        public static int MEDIUM = 2;
+        public static int LOW = 1;
+        public static int OFF = 0;
+        string msRoom;
+        int miSpeed;
 
-        public void Execute() {}
-        public void Undo() { }
-    }
-    public class LightOnCommand : ICommand
-    {
-        Light moLight;
-        public LightOnCommand(Light voLight)
+        public CeilingFan(string vsRoom)
         {
-            moLight = voLight;
+            msRoom = vsRoom;
+            miSpeed = OFF;
         }
-        public void Execute()
+        public void Off()
         {
-            moLight.On();
+            miSpeed = OFF;
+            Console.WriteLine(String.Format("{0} ceiling fan set to {1}", msRoom, miSpeed));
         }
-        public void Undo()
+        public void High()
         {
-            moLight.Off();
+            miSpeed = HIGH;
+            Console.WriteLine(String.Format("{0} ceiling fan set to {1}", msRoom, miSpeed));
         }
-    }
-    public class LightOffCommand : ICommand
-    {
-        Light moLight;
-        public LightOffCommand(Light voLight)
+        public void Medium()
         {
-            moLight = voLight;
+            miSpeed = MEDIUM;
+            Console.WriteLine(String.Format("{0} ceiling fan set to {1}", msRoom, miSpeed));
         }
-        public void Execute()
+        public void Low()
         {
-            moLight.Off();
+            miSpeed = LOW;
+            Console.WriteLine(String.Format("{0} ceiling fan set to {1}", msRoom, miSpeed));
         }
-        public void Undo()
+        public int GetSpeed()
         {
-            moLight.On();
+            return miSpeed;
         }
-    }
-    public class GarageDoorOpenCommand : ICommand
-    {
-        GarageDoor moGarageDoor;
-        public GarageDoorOpenCommand(GarageDoor voGarageDoor)
-        {
-            moGarageDoor = voGarageDoor;
-        }
-        public void Execute()
-        {
-            moGarageDoor.Open();
-        }
-        public void Undo()
-        {
-            moGarageDoor.Close();
-        }
-    }
-    public class GarageDoorCloseCommand : ICommand
-    {
-        GarageDoor moGarageDoor;
-        public GarageDoorCloseCommand(GarageDoor voGarageDoor)
-        {
-            moGarageDoor = voGarageDoor;
-        }
-        public void Execute()
-        {
-            moGarageDoor.Close();
-        }
-        public void Undo()
-        {
-            moGarageDoor.Open();
-        }
-    }
-    public class StereoOnWithCDCommand : ICommand
-    {
-        Stereo moStereo;
-        public StereoOnWithCDCommand(Stereo voStereo)
-        {
-            moStereo = voStereo;
-        }
-        public void Execute()
-        {
-            moStereo.On();
-            moStereo.SetCD();
-            moStereo.SetVolume(11);
-        }
-        public void Undo()
-        {
-            moStereo.Off();
-        }
-    }
-    public class StereOffCommand : ICommand
-    {
-        Stereo moStereo;
-        public StereOffCommand(Stereo voStereo)
-        {
-            moStereo = voStereo;
-        }
-        public void Execute()
-        {
-            moStereo.Off();
-        }
-        public void Undo()
-        {
-            moStereo.On();
-            // Need more here?
-        }
+
     }
     public class CeilngFanOffCommand : ICommand
     {
@@ -244,5 +179,4 @@ namespace RemoteCommand
             }
         }
     }
-
 }
