@@ -1,0 +1,1 @@
+Complete Ch 7 adapter - Next up Ch 8 template method
